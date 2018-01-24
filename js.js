@@ -1009,7 +1009,7 @@ Leader=JSON.stringify(leader, "", 4);
 alert(Leader);
 
 var leadObj=JSON.parse(Leader);
-*/
+
 
 
 var leader = {
@@ -1031,7 +1031,7 @@ soldier.leader = leader;
         coppied.name=obj.name;
     ('soldier' in obj) ? coppied.soldier=
     return coppied;
-}*/
+}
 
 var crossLinkDeleter=function (obj1, obj2) {
     var coppied1 = {};
@@ -1059,3 +1059,12 @@ var mas = crossLinkDeleter(leader,soldier);
 
 var team = [mas[0], mas[1]];
 alert(JSON.stringify(team,"",4));
+
+
+
+let user = {name : "Dima", isAdmin: true}
+
+let clone = Object.assign({}, user)
+ alert(JSON.stringify(clone));
+*/
+
