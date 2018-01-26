@@ -1066,7 +1066,6 @@ let user = {name : "Dima", isAdmin: true}
 
 let clone = Object.assign({}, user)
  alert(JSON.stringify(clone));
-*/
 
 let range = {
     from: 1,
@@ -1128,3 +1127,43 @@ for (let num of range) {
 for (let lett of kek){
     alert(lett);
 }
+
+
+let map = new Map();
+
+map
+    .set(true, "asd")
+    .set('lel', "wahib")
+
+ //alert(map.get('lel'));
+
+    if (map.delete(false)){
+        alert('da');
+        }
+    else  alert('net')
+    */
+
+'use strict';
+
+let recipeMap = new Map([
+    ['огурцов',   '500 гр'],
+    ['помидоров', '350 гр'],
+    ['сметаны',   '50 гр']
+]);
+
+// цикл по ключам
+for(let fruit of recipeMap.keys()) {
+    alert(fruit); // огурцов, помидоров, сметаны
+}
+
+// цикл по значениям [ключ,значение]
+for(let amount of recipeMap.values()) {
+    alert(amount); // 500 гр, 350 гр, 50 гр
+}
+
+// цикл по записям
+for(let entry of recipeMap) { // то же что и recipeMap.entries()
+    alert(entry);
+}// огурцов,500 гр , и т.д., массивы по 2 значения
+
+recipeMap.forEach((value, key)=> {alert(`${key} : ${value}`)});
