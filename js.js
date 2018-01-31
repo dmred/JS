@@ -1221,7 +1221,7 @@ promise
         }
     );
 
-    */
+
 
 'use strict';
 
@@ -1250,3 +1250,86 @@ httpGet('/article/promise/user.json')
 
         setTimeout(() => img.remove(), 3000); // (*)
     });
+
+
+/// Этот promise завершится с ошибкой через 1 секунду
+var promise = new Promise((resolve, reject) => {
+  //console.log(promise),
+  setTimeout(() => {
+    reject(new Error("время вышло!"));
+    console.log(promise);
+  }, 1000);
+
+});
+console.log(promise);
+promise
+  .then(
+    result => alert("Fulfilled: " + result),
+    console.log(promise),
+    error => alert("Rejected: " + error.message) // Rejected: время вышло!
+  );
+
+
+  // сделать запрос
+httpGet('/article/promise/user.json')
+  // 1. Получить данные о пользователе в JSON и передать дальше
+  .then(response => {
+    console.log(response);
+    let user = 'dmred';
+    return user;
+  })
+  // 2. Получить информацию с github
+  .then(user => {
+    console.log(user);
+    return httpGet(`https://api.github.com/users/${user.name}`);
+  })
+  // 3. Вывести аватар на 3 секунды (можно с анимацией)
+  .then(githubUser => {
+    console.log(githubUser);
+    githubUser = JSON.parse(githubUser);
+
+    let img = new Image();
+    img.src = githubUser.avatar_url;
+    img.className = "promise-avatar-example";
+    document.body.appendChild(img);
+
+    setTimeout(() => img.remove(), 3000); // (*)
+  });
+
+
+
+function delay(ms)
+{
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  } );
+}
+
+delay(1000).then(alert);
+*/
+
+
+'use strict';
+
+let urls = [
+  'user.json',
+  'guest.json'
+];
+
+
+let chain = Promise.resolve();
+let results = [];
+urls.forEach(function (url) {
+    chain= chain
+        .then(() => httpGet(url))
+        .then((result) => {
+            results.push(result);
+        });
+});
+
+chain.then(()=>{
+    alert(results);
+});
+
+
+  /**/
